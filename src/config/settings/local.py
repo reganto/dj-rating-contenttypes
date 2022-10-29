@@ -4,3 +4,5 @@ from .base import *
 
 
 DEBUG = get_env("DEBUG", default=True, cast=bool)
+
+ALLOWED_HOSTS = ["bin.io"]
