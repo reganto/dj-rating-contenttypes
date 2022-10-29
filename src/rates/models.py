@@ -1,12 +1,12 @@
+from common.behaviors import ContentTypeable
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 
 # Create your models here.
 
 
-class Rate(models.Model):
+class Rate(ContentTypeable, models.Model):
     ip = models.GenericIPAddressField()
     score = models.PositiveSmallIntegerField(
         validators=[
@@ -14,12 +14,11 @@ class Rate(models.Model):
             MinValueValidator(1),
         ]
     )
-    content_type = models.ForeignKey(
-        ContentType,
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        null=True,
     )
-    object_id = models.PositiveIntegerField()
-    contect_object = GenericForeignKey()
 
     class Meta:
         indexes = [
