@@ -19,4 +19,7 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("posts/", include("posts.urls", namespace="posts")),
+    path("api/", include("api.urls", namespace="api")),
+    # Development
+    path("browsable_api_auth/", include("rest_framework.urls")),
 ]

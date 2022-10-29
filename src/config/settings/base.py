@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.humanize",
     "common.apps.CommonConfig",
+    "rest_framework",
     "rates.apps.RatesConfig",
     "posts.apps.PostsConfig",
 ]
