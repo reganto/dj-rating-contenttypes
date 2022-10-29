@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load common_extras %}
+{% block body %}
+<div id="posts">
+    {% for post in posts %}
+    <div class="post card">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <div class="meta card-subtitle">
+                <strong>
+                    <small>Created at: {{ post.created|naturaltime }}</small>,
+                    <small>Updated at: {{ post.modified|naturaltime }}</small>,
+                    <small>Written by: {{ post.author }}</small>
+                </strong>
+            </div>
+            <p class="card-text">{{ post.body }}</p>
+            <p>
+                This post has <span class="rates-count">{{ post.rates_count }}</span> rates
+                with average of <span class="rates-average">{{ post.rates_average|floatformat }}</span>,
+                your rate to this post is <span class="current-user-rate">{% call_method post "current_user_rate" request.user.id %}</span>
+            </p>
+        </div>
+    </div>
+    {% empty %}
+
+    {% endfor %}
+</div>
+{% endblock %}
